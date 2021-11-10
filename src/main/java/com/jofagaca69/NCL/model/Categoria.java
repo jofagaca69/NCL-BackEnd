@@ -22,6 +22,11 @@ public class Categoria implements Serializable {
 
 	private String nombre;
 
+	//bi-directional many-to-one association to ClasesVehiculo
+	@ManyToOne
+	@JoinColumn(name="clases_vehiculo_id")
+	private ClasesVehiculo clasesVehiculo;
+
 	//bi-directional many-to-one association to Item
 	@OneToMany(mappedBy="categoria")
 	private List<Item> items;
@@ -55,6 +60,14 @@ public class Categoria implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public ClasesVehiculo getClasesVehiculo() {
+		return this.clasesVehiculo;
+	}
+
+	public void setClasesVehiculo(ClasesVehiculo clasesVehiculo) {
+		this.clasesVehiculo = clasesVehiculo;
 	}
 
 	public List<Item> getItems() {

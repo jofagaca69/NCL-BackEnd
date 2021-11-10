@@ -11,8 +11,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="clases_vehiculo")
-@NamedQuery(name="ClaseVehiculo.findAll", query="SELECT c FROM ClaseVehiculo c")
-public class ClaseVehiculo implements Serializable {
+@NamedQuery(name="ClasesVehiculo.findAll", query="SELECT c FROM ClasesVehiculo c")
+public class ClasesVehiculo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -22,11 +22,15 @@ public class ClaseVehiculo implements Serializable {
 
 	private String nombre;
 
+	//bi-directional many-to-one association to Categoria
+	@OneToMany(mappedBy="clasesVehiculo")
+	private List<Categoria> categorias;
+
 	//bi-directional many-to-one association to Vehiculo
-	@OneToMany(mappedBy="claseVehiculo")
+	@OneToMany(mappedBy="clasesVehiculo")
 	private List<Vehiculo> vehiculos;
 
-	public ClaseVehiculo() {
+	public ClasesVehiculo() {
 	}
 
 	public int getId() {
@@ -53,6 +57,28 @@ public class ClaseVehiculo implements Serializable {
 		this.nombre = nombre;
 	}
 
+	public List<Categoria> getCategorias() {
+		return this.categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public Categoria addCategoria(Categoria categoria) {
+		getCategorias().add(categoria);
+		categoria.setClasesVehiculo(this);
+
+		return categoria;
+	}
+
+	public Categoria removeCategoria(Categoria categoria) {
+		getCategorias().remove(categoria);
+		categoria.setClasesVehiculo(null);
+
+		return categoria;
+	}
+
 	public List<Vehiculo> getVehiculos() {
 		return this.vehiculos;
 	}
@@ -63,14 +89,14 @@ public class ClaseVehiculo implements Serializable {
 
 	public Vehiculo addVehiculo(Vehiculo vehiculo) {
 		getVehiculos().add(vehiculo);
-		vehiculo.setClaseVehiculo(this);
+		vehiculo.setClasesVehiculo(this);
 
 		return vehiculo;
 	}
 
 	public Vehiculo removeVehiculo(Vehiculo vehiculo) {
 		getVehiculos().remove(vehiculo);
-		vehiculo.setClaseVehiculo(null);
+		vehiculo.setClasesVehiculo(null);
 
 		return vehiculo;
 	}

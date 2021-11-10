@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Entity
 @Table(name="lineas_marcas")
-@NamedQuery(name="LineaMarca.findAll", query="SELECT l FROM LineaMarca l")
-public class LineaMarca implements Serializable {
+@NamedQuery(name="LineasMarca.findAll", query="SELECT l FROM LineasMarca l")
+public class LineasMarca implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,16 +27,16 @@ public class LineaMarca implements Serializable {
 
 	private String version;
 
-	//bi-directional many-to-one association to MarcaVehiculo
+	//bi-directional many-to-one association to MarcasVehiculo
 	@ManyToOne
 	@JoinColumn(name="marcas_vehiculos_id")
-	private MarcaVehiculo marcaVehiculo;
+	private MarcasVehiculo marcasVehiculo;
 
 	//bi-directional many-to-one association to Vehiculo
-	@OneToMany(mappedBy="lineaMarca")
+	@OneToMany(mappedBy="lineasMarca")
 	private List<Vehiculo> vehiculos;
 
-	public LineaMarca() {
+	public LineasMarca() {
 	}
 
 	public int getId() {
@@ -71,12 +71,12 @@ public class LineaMarca implements Serializable {
 		this.version = version;
 	}
 
-	public MarcaVehiculo getMarcaVehiculo() {
-		return this.marcaVehiculo;
+	public MarcasVehiculo getMarcasVehiculo() {
+		return this.marcasVehiculo;
 	}
 
-	public void setMarcaVehiculo(MarcaVehiculo marcaVehiculo) {
-		this.marcaVehiculo = marcaVehiculo;
+	public void setMarcasVehiculo(MarcasVehiculo marcasVehiculo) {
+		this.marcasVehiculo = marcasVehiculo;
 	}
 
 	public List<Vehiculo> getVehiculos() {
@@ -89,14 +89,14 @@ public class LineaMarca implements Serializable {
 
 	public Vehiculo addVehiculo(Vehiculo vehiculo) {
 		getVehiculos().add(vehiculo);
-		vehiculo.setLineaMarca(this);
+		vehiculo.setLineasMarca(this);
 
 		return vehiculo;
 	}
 
 	public Vehiculo removeVehiculo(Vehiculo vehiculo) {
 		getVehiculos().remove(vehiculo);
-		vehiculo.setLineaMarca(null);
+		vehiculo.setLineasMarca(null);
 
 		return vehiculo;
 	}

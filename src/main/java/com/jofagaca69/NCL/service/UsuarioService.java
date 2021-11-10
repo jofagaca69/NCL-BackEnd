@@ -59,7 +59,7 @@ public class UsuarioService implements IUsuarioService{
 			LocalDate fechaActual = LocalDate.now();
 			Usuario usuarioNuevo = new Usuario(usuarioNuevoInfo.getString("username"), usuarioNuevoInfo.getString("nombres"), usuarioNuevoInfo.getString("apellidos"), 
 					usuarioNuevoInfo.getString("tipoDni"), usuarioNuevoInfo.getInt("numeroDni"), usuarioNuevoInfo.getString("password"), usuarioNuevoInfo.getString("email"), usuarioNuevoInfo.getInt("celular"), 
-					rol, fechaActual);
+					rol);
 			
 			if (usuarioRepo.save(usuarioNuevo) != null) {
 				return true;

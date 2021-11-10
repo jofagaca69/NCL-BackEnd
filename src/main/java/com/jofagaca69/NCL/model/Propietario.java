@@ -6,13 +6,13 @@ import java.util.List;
 
 
 /**
- * The persistent class for the conductores database table.
+ * The persistent class for the propietarios database table.
  * 
  */
 @Entity
-@Table(name="conductores")
-@NamedQuery(name="Conductor.findAll", query="SELECT c FROM Conductor c")
-public class Conductor implements Serializable {
+@Table(name="propietarios")
+@NamedQuery(name="Propietario.findAll", query="SELECT p FROM Propietario p")
+public class Propietario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,10 +25,10 @@ public class Conductor implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-many association to Vehiculo
-	@ManyToMany(mappedBy="conductores")
+	@ManyToMany(mappedBy="propietarios")
 	private List<Vehiculo> vehiculos;
 
-	public Conductor() {
+	public Propietario() {
 	}
 
 	public int getCedula() {

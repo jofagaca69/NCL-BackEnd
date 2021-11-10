@@ -24,14 +24,10 @@ public class Certificado implements Serializable {
 
 	//bi-directional many-to-one association to Revision
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="revision_id", referencedColumnName="id")
-		})
 	private Revision revision;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="usuario_username")
 	private Usuario usuario;
 
 	public Certificado() {

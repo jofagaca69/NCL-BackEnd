@@ -37,9 +37,6 @@ public class Vehiculo implements Serializable {
 	@Column(name="marca_vehiculo")
 	private int marcaVehiculo;
 
-	@Column(name="nombre_propietario")
-	private String nombrePropietario;
-
 	@Column(name="numero_interno_empresa")
 	private int numeroInternoEmpresa;
 
@@ -47,33 +44,33 @@ public class Vehiculo implements Serializable {
 	@OneToMany(mappedBy="vehiculo")
 	private List<Revision> revisiones;
 
-	//bi-directional many-to-one association to ClaseVehiculo
+	//bi-directional many-to-one association to ClasesVehiculo
 	@ManyToOne
 	@JoinColumn(name="clase_vehiculo_id")
-	private ClaseVehiculo claseVehiculo;
-
-	//bi-directional many-to-many association to Conductor
-	@ManyToMany
-	@JoinTable(
-		name="conductores_has_vehiculos"
-		, joinColumns={
-			@JoinColumn(name="vehiculo_placa")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="conductor_cedula")
-			}
-		)
-	private List<Conductor> conductores;
+	private ClasesVehiculo clasesVehiculo;
 
 	//bi-directional many-to-one association to EmpresaTransporte
 	@ManyToOne
 	@JoinColumn(name="empresa_transportes_id")
 	private EmpresaTransporte empresaTransporte;
 
-	//bi-directional many-to-one association to LineaMarca
+	//bi-directional many-to-one association to LineasMarca
 	@ManyToOne
 	@JoinColumn(name="lineas_marcas_id")
-	private LineaMarca lineaMarca;
+	private LineasMarca lineasMarca;
+
+	//bi-directional many-to-many association to Propietario
+	@ManyToMany
+	@JoinTable(
+		name="propietarios_has_vehiculos"
+		, joinColumns={
+			@JoinColumn(name="vehiculo_placa")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="propietario_cedula")
+			}
+		)
+	private List<Propietario> propietarios;
 
 	public Vehiculo() {
 	}
@@ -142,14 +139,6 @@ public class Vehiculo implements Serializable {
 		this.marcaVehiculo = marcaVehiculo;
 	}
 
-	public String getNombrePropietario() {
-		return this.nombrePropietario;
-	}
-
-	public void setNombrePropietario(String nombrePropietario) {
-		this.nombrePropietario = nombrePropietario;
-	}
-
 	public int getNumeroInternoEmpresa() {
 		return this.numeroInternoEmpresa;
 	}
@@ -180,20 +169,12 @@ public class Vehiculo implements Serializable {
 		return revisione;
 	}
 
-	public ClaseVehiculo getClaseVehiculo() {
-		return this.claseVehiculo;
+	public ClasesVehiculo getClasesVehiculo() {
+		return this.clasesVehiculo;
 	}
 
-	public void setClaseVehiculo(ClaseVehiculo claseVehiculo) {
-		this.claseVehiculo = claseVehiculo;
-	}
-
-	public List<Conductor> getConductores() {
-		return this.conductores;
-	}
-
-	public void setConductores(List<Conductor> conductores) {
-		this.conductores = conductores;
+	public void setClasesVehiculo(ClasesVehiculo clasesVehiculo) {
+		this.clasesVehiculo = clasesVehiculo;
 	}
 
 	public EmpresaTransporte getEmpresaTransporte() {
@@ -204,12 +185,20 @@ public class Vehiculo implements Serializable {
 		this.empresaTransporte = empresaTransporte;
 	}
 
-	public LineaMarca getLineaMarca() {
-		return this.lineaMarca;
+	public LineasMarca getLineasMarca() {
+		return this.lineasMarca;
 	}
 
-	public void setLineaMarca(LineaMarca lineaMarca) {
-		this.lineaMarca = lineaMarca;
+	public void setLineasMarca(LineasMarca lineasMarca) {
+		this.lineasMarca = lineasMarca;
+	}
+
+	public List<Propietario> getPropietarios() {
+		return this.propietarios;
+	}
+
+	public void setPropietarios(List<Propietario> propietarios) {
+		this.propietarios = propietarios;
 	}
 
 }

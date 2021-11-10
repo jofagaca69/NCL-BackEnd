@@ -16,8 +16,8 @@ import java.util.List;
 public class Revision implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private RevisionPK id;
+	@Id
+	private int id;
 
 	private String estado;
 
@@ -47,10 +47,10 @@ public class Revision implements Serializable {
 	@JoinTable(
 		name="revisiones_has_categorias"
 		, joinColumns={
-			@JoinColumn(name="revision_id", referencedColumnName="id")
+			@JoinColumn(name="revisiones_id")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="categoria_id")
+			@JoinColumn(name="categorias_id")
 			}
 		)
 	private List<Categoria> categorias;
@@ -62,22 +62,20 @@ public class Revision implements Serializable {
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="usuario_username")
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Vehiculo
 	@ManyToOne
-	@JoinColumn(name="vehiculo_placa")
 	private Vehiculo vehiculo;
 
 	public Revision() {
 	}
 
-	public RevisionPK getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(RevisionPK id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
